@@ -29,7 +29,7 @@
     <div class="container my-5 py-5">
         <div class="row align-items-center g-5">
             <div class="col-lg-7">
-                <span class="badge bg-primary-subtle text-primary mb-3 px-3 py-2 rounded-pill fw-bold">Seminar Terbesar 2026</span>
+                <span class="badge bg-primary-subtle text-primary mb-3 px-3 py-2 rounded-pill fw-bold">Seminar Informatika Terbesar 2026</span>
                 <h1 class="display-5 fw-bold text-dark lh-sm mb-3">Membangun Aplikasi Web Modern Berbasis Skala Global</h1>
                 <p class="lead text-primary fw-semibold mb-4">Tema: "Akselerasi Full Stack Developer Menggunakan Arsitektur Robust & Efisien"</p>
                 
@@ -39,8 +39,8 @@
                         <strong class="text-dark">25 Desember 2026</strong>
                     </div>
                     <div class="p-3 bg-white border-start border-primary border-4 rounded shadow-sm">
-                        <small class="text-muted d-block">Tempat/Media</small>
-                        <strong class="text-dark">Zoom Meeting (Online)</strong>
+                        <small class="text-muted d-block">Tempat</small>
+                        <strong class="text-dark">Auditorium lt. 4 Gedung Pusat UST</strong>
                     </div>
                 </div>
 
@@ -67,7 +67,7 @@
 
     <footer class="bg-white py-4 mt-auto border-top">
         <div class="container text-center text-muted">
-            <small>&copy; 2026 Sistem Pendaftaran Seminar Online. Deforka Fest.</small>
+            <small>&copy; 2026 Sistem Pendaftaran Seminar. Deforka Fest.</small>
         </div>
     </footer>
 

@@ -38,7 +38,7 @@ $koneksi->close();
             <div class="row align-items-center mb-4">
                 <div class="col-sm-6">
                     <h2 class="fw-bold text-secondary mb-0">INVOICE REGISTRASI</h2>
-                    <span class="text-primary fw-bold small">Seminar Nasional Web Development 2026</span>
+                    <span class="text-primary fw-bold small">Seminar Deforka Fest Web Development 2026</span>
                 </div>
                 <div class="col-sm-6 text-sm-end mt-3 mt-sm-0">
                     <h3 class="fw-bold text-primary mb-0">Deforka fest</h3>

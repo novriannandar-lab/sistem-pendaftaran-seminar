@@ -47,7 +47,10 @@ if ($keyword != "") {
 
     <div class="container-fluid px-4 my-5">
         <div class="d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-3 mb-4">
-            <h2 class="fw-bold text-dark mb-0">Daftar Pendaftar Seminar</h2>
+            <div class="d-flex align-items-center gap-3 flex-wrap">
+                <h2 class="fw-bold text-dark mb-0">Daftar Pendaftar Seminar</h2>
+                <a href="pengaturan.php" class="btn btn-outline-primary fw-bold btn-sm px-3 shadow-sm">⚙️ Pengaturan Tema</a>
+            </div>
             
             <form action="dashboard.php" method="GET" class="d-flex gap-2">
                 <input type="text" name="search" class="form-control" placeholder="Cari nama / ID transaksi..." value="<?php echo $keyword; ?>" style="max-width: 260px;">

@@ -78,7 +78,7 @@ $koneksi->close();
 
     <footer class="bg-white py-4 mt-auto border-top">
         <div class="container text-center text-muted">
-            <small>&copy; 2026 Sistem Pendaftaran Seminar. Deforka Fest.</small>
+            <small>&copy;  Sistem Pendaftaran Seminar. Deforka Fest.</small>
         </div>
     </footer>
 

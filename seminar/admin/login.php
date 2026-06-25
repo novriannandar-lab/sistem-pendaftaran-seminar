@@ -47,7 +47,7 @@ $koneksi->close();
 
     <div class="card border-0 shadow-lg p-4 rounded-3 bg-white w-100 mx-3" style="max-width: 400px;">
         <div class="card-body">
-            <h4 class="fw-bold text-center text-dark mb-1">Admin Gateway</h4>
+            <h4 class="fw-bold text-center text-dark mb-1">Admin </h4>
             <p class="text-muted text-center small mb-4">Masuk untuk mengelola data pendaftar.</p>
 
             <?php if (!empty($error_msg)): ?>

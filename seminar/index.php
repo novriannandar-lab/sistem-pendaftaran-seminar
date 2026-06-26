@@ -20,7 +20,7 @@ $koneksi->close();
 
     <nav class="navbar navbar-expand-lg navbar-white bg-white shadow-sm sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold text-primary" href="index.php">Deforka fest</a>
+            <a class="navbar-brand fw-bold text-primary" href="index.php">Deforka Fest</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-shadow"></span>
                 <span class="navbar-toggler-icon"></span>

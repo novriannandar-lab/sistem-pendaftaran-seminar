@@ -12,10 +12,10 @@ if (isset($_GET['search'])) {
     $keyword = htmlspecialchars(trim($_GET['search']));
 }
 
-if ($keyword != "") {
-    $sql = "SELECT * FROM peserta WHERE nama LIKE ? OR id_transaksi LIKE ? ORDER BY id DESC";
+if ($keyword!= "") {
+    $sql = "SELECT * FROM peserta WHERE nama LIKE? OR id_transaksi LIKE? ORDER BY id DESC";
     $stmt = $koneksi->prepare($sql);
-    $search_param = "%" . $keyword . "%";
+    $search_param = "%". $keyword. "%";
     $stmt->bind_param("ss", $search_param, $search_param);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -37,9 +37,9 @@ if ($keyword != "") {
 
     <nav class="navbar navbar-dark bg-dark shadow sticky-top py-3">
         <div class="container-fluid px-4">
-            <span class="navbar-brand fw-bold text-info fs-5">Admin Panel 2026</span>
+            <span class="navbar-brand fw-bold text-info fs-5">Admin Panel Deforka</span>
             <div class="d-flex align-items-center gap-3">
-                <span class="text-light small">Halo, <strong><?php echo $_SESSION['admin_user']; ?></strong></span>
+                <span class="text-light small">Halo, <strong><?php echo $_SESSION['admin_user'];?></strong></span>
                 <a href="logout.php" class="btn btn-danger btn-sm fw-bold px-3">Logout</a>
             </div>
         </div>
@@ -50,20 +50,25 @@ if ($keyword != "") {
             <div class="d-flex align-items-center gap-3 flex-wrap">
                 <h2 class="fw-bold text-dark mb-0">Daftar Pendaftar Seminar</h2>
                 <a href="pengaturan.php" class="btn btn-outline-primary fw-bold btn-sm px-3 shadow-sm">⚙️ Pengaturan Tema</a>
+
+                <!-- INI TOMBOL BARU NYA -->
+                <a href="register.php" class="btn btn-outline-dark fw-bold btn-sm px-3 shadow-sm">👤 Tambah Admin</a>
+
+                <button id="btnExportExcel" class="btn btn-success fw-bold btn-sm px-3 shadow-sm">📥 Export Excel</button>
             </div>
-            
+
             <form action="dashboard.php" method="GET" class="d-flex gap-2">
-                <input type="text" name="search" class="form-control" placeholder="Cari nama / ID transaksi..." value="<?php echo $keyword; ?>" style="max-width: 260px;">
+                <input type="text" name="search" class="form-control" placeholder="Cari nama / ID transaksi..." value="<?php echo $keyword;?>" style="max-width: 260px;">
                 <button type="submit" class="btn btn-primary fw-bold">Cari</button>
-                <?php if ($keyword != ""): ?>
+                <?php if ($keyword!= ""):?>
                     <a href="dashboard.php" class="btn btn-secondary fw-bold">Reset</a>
-                <?php endif; ?>
+                <?php endif;?>
             </form>
         </div>
 
         <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
+                <table id="tabelPeserta" class="table table-hover align-middle mb-0">
                     <thead class="table-dark text-uppercase font-xs">
                         <tr>
                             <th class="ps-3">ID Transaksi</th>
@@ -77,55 +82,99 @@ if ($keyword != "") {
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if ($result->num_rows > 0): ?>
-                            <?php while($row = $result->fetch_assoc()): ?>
+                        <?php if ($result->num_rows > 0):?>
+                            <?php while($row = $result->fetch_assoc()):?>
                                 <tr>
-                                    <td class="ps-3 fw-bold text-primary"><?php echo $row['id_transaksi']; ?></td>
+                                    <td class="ps-3 fw-bold text-primary"><?php echo $row['id_transaksi'];?></td>
                                     <td>
-                                        <div class="fw-bold"><?php echo $row['nama']; ?></div>
-                                        <small class="text-muted font-xs"><?php echo $row['jenis_kelamin']; ?></small>
+                                        <div class="fw-bold"><?php echo $row['nama'];?></div>
+                                        <small class="text-muted font-xs"><?php echo $row['jenis_kelamin'];?></small>
                                     </td>
                                     <td>
-                                        <div class="small fw-semibold"><?php echo $row['universitas']; ?></div>
-                                        <div class="text-muted font-xs"><?php echo $row['prodi']; ?></div>
+                                        <div class="small fw-semibold"><?php echo $row['universitas'];?></div>
+                                        <div class="text-muted font-xs"><?php echo $row['prodi'];?></div>
                                     </td>
                                     <td>
-                                        <div class="small">WA: <?php echo $row['whatsapp']; ?></div>
-                                        <div class="text-muted font-xs"><?php echo $row['email']; ?></div>
+                                        <div class="small">WA: <?php echo $row['whatsapp'];?></div>
+                                        <div class="text-muted font-xs"><?php echo $row['email'];?></div>
                                     </td>
                                     <td>
-                                        <?php $badgeColor = ($row['kelas_seminar'] === 'vip') ? 'bg-warning text-dark' : 'bg-info text-white'; ?>
-                                        <span class="badge <?php echo $badgeColor; ?> font-xs text-uppercase"><?php echo $row['kelas_seminar']; ?></span>
-                                        <div class="text-muted font-xs mt-1"><?php echo $row['metode_pembayaran']; ?></div>
+                                        <?php $badgeColor = ($row['kelas_seminar'] === 'vip')? 'bg-warning text-dark' : 'bg-info text-white';?>
+                                        <span class="badge <?php echo $badgeColor;?> font-xs text-uppercase"><?php echo $row['kelas_seminar'];?></span>
+                                        <div class="text-muted font-xs mt-1"><?php echo $row['metode_pembayaran'];?></div>
                                     </td>
                                     <td>
-                                        <a href="../uploads/<?php echo $row['bukti_transfer']; ?>" target="_blank" class="btn btn-link btn-sm p-0 text-decoration-none fw-bold">Lihat Foto &rarr;</a>
+                                        <a href="../uploads/<?php echo $row['bukti_transfer'];?>" target="_blank" class="btn btn-link btn-sm p-0 text-decoration-none fw-bold">Lihat Foto &rarr;</a>
                                     </td>
                                     <td>
                                         <form action="edit_status.php" method="POST" class="m-0">
-                                            <input type="hidden" name="id_transaksi" value="<?php echo $row['id_transaksi']; ?>">
+                                            <input type="hidden" name="id_transaksi" value="<?php echo $row['id_transaksi'];?>">
                                             <select name="status_pembayaran" onchange="this.form.submit()" class="form-select form-select-sm fw-semibold" style="width: 170px;">
-                                                <option value="Menunggu Verifikasi" <?php if($row['status_pembayaran'] === 'Menunggu Verifikasi') echo 'selected'; ?>>Menunggu Verifikasi</option>
-                                                <option value="Lunas" <?php if($row['status_pembayaran'] === 'Lunas') echo 'selected'; ?>>Lunas</option>
-                                                <option value="Ditolak" <?php if($row['status_pembayaran'] === 'Ditolak') echo 'selected'; ?>>Ditolak</option>
+                                                <option value="Menunggu Verifikasi" <?php if($row['status_pembayaran'] === 'Menunggu Verifikasi') echo 'selected';?>>Menunggu Verifikasi</option>
+                                                <option value="Lunas" <?php if($row['status_pembayaran'] === 'Lunas') echo 'selected';?>>Lunas</option>
+                                                <option value="Ditolak" <?php if($row['status_pembayaran'] === 'Ditolak') echo 'selected';?>>Ditolak</option>
                                             </select>
                                         </form>
                                     </td>
                                     <td class="text-center pe-3">
-                                        <a href="hapus.php?id=<?php echo $row['id_transaksi']; ?>" onclick="return confirm('Hapus permanen data peserta ini?')" class="btn btn-outline-danger btn-sm fw-bold">Hapus</a>
+                                        <a href="hapus.php?id=<?php echo $row['id_transaksi'];?>" onclick="return confirm('Hapus permanen data peserta ini?')" class="btn btn-outline-danger btn-sm fw-bold">Hapus</a>
                                     </td>
                                 </tr>
-                            <?php endwhile; ?>
-                        <?php else: ?>
+                            <?php endwhile;?>
+                        <?php else:?>
                             <tr>
                                 <td colspan="8" class="text-center py-4 text-muted">Data pendaftar tidak ditemukan.</td>
                             </tr>
-                        <?php endif; ?>
+                        <?php endif;?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
+    <!-- Library SheetJS buat export Excel -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+
+    <script>
+    document.getElementById('btnExportExcel').addEventListener('click', function(e) {
+        e.preventDefault();
+
+        let semuaBaris = document.querySelectorAll('#tabelPeserta tbody tr');
+        let totalData = 0;
+        semuaBaris.forEach(row => {
+            if(!row.querySelector('td[colspan]')) totalData++;
+        });
+
+        if(totalData <= 0) {
+            alert('Data kosong, nggak ada yg bisa di-export');
+            return;
+        }
+
+        let yakin = confirm('Export ' + totalData + ' data peserta ke Excel?');
+        if(!yakin) return;
+
+        let btn = this;
+        btn.innerHTML = '⏳ Membuat file...';
+        btn.disabled = true;
+        btn.classList.remove('btn-success');
+        btn.classList.add('btn-warning');
+
+        setTimeout(() => {
+            let tabel = document.getElementById('tabelPeserta');
+            let wb = XLSX.utils.table_to_book(tabel, {sheet: "Data Peserta"});
+
+            let namaFile = 'data_peserta_' + new Date().toISOString().slice(0,10) + '.xlsx';
+            XLSX.writeFile(wb, namaFile);
+
+            btn.innerHTML = '✅ Berhasil!';
+            setTimeout(() => {
+                btn.innerHTML = '📥 Export Excel';
+                btn.disabled = false;
+                btn.classList.remove('btn-warning');
+                btn.classList.add('btn-success');
+            }, 2000);
+        }, 500);
+    });
+    </script>
 </body>
 </html>
